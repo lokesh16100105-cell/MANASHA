@@ -1,0 +1,192 @@
+# Sister Birthday Surprise Website 🎉
+
+Save this file as index.html
+
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Sister</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#ffb6f5,#ffc0cb,#ffe4e1);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+.container{
+    width:90%;
+    max-width:500px;
+    background:rgba(255,255,255,0.25);
+    backdrop-filter:blur(12px);
+    border-radius:25px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    animation:fadeIn 2s ease;
+}
+
+.photo{
+    width:220px;
+    height:220px;
+    border-radius:20px;
+    object-fit:cover;
+    border:5px solid white;
+    box-shadow:0 0 25px rgba(255,255,255,0.8);
+    margin-bottom:20px;
+}
+
+h1{
+    color:#ff1493;
+    margin-bottom:15px;
+    font-size:32px;
+}
+
+.message{
+    font-size:18px;
+    color:#222;
+    line-height:1.8;
+    margin-top:15px;
+}
+
+.timer{
+    font-size:45px;
+    color:#d63384;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+.hidden{
+    display:none;
+}
+
+.stars{
+    position:absolute;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    top:0;
+    left:0;
+}
+
+.stars span{
+    position:absolute;
+    display:block;
+    width:8px;
+    height:8px;
+    background:white;
+    border-radius:50%;
+    animation:animate 5s linear infinite;
+}
+
+@keyframes animate{
+    0%{
+        transform:translateY(0px);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-1000px);
+        opacity:0;
+    }
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:scale(0.8);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+</style>
+</head>
+<body>
+
+<div class="stars">
+    <span style="left:10%; animation-duration:6s;"></span>
+    <span style="left:20%; animation-duration:8s;"></span>
+    <span style="left:35%; animation-duration:5s;"></span>
+    <span style="left:50%; animation-duration:7s;"></span>
+    <span style="left:65%; animation-duration:4s;"></span>
+    <span style="left:80%; animation-duration:6s;"></span>
+    <span style="left:90%; animation-duration:9s;"></span>
+</div>
+
+<div class="container">
+
+    <img src="/PIC.jpeg" class="photo" alt="Sister Photo">
+
+    <div id="countdownSection">
+        <h1>Birthday Countdown 🎂</h1>
+        <div class="timer" id="timer"></div>
+    </div>
+
+    <div id="birthdayMessage" class="hidden">
+        <h1>🎉 HAPPY BIRTHDAY MY SISTER 🎉</h1>
+
+        <div class="message">
+            Wish you many more happy returns of the day ❤️<br><br>
+
+            This second you begin a new life.
+            I wish you achieve many things in your life.
+            Keep learning and use all opportunities.
+            Keep rocking in your life.
+            <br><br>
+            I will always be there for you as a brother 💖
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+// Set Birthday Time
+const birthdayDate = new Date();
+birthdayDate.setHours(24,0,0,0);
+
+const timer = document.getElementById('timer');
+const birthdayMessage = document.getElementById('birthdayMessage');
+const countdownSection = document.getElementById('countdownSection');
+
+function updateCountdown(){
+
+    const now = new Date().getTime();
+    const distance = birthdayDate - now;
+
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    timer.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
+
+    if(distance < 0){
+        countdownSection.style.display = 'none';
+        birthdayMessage.classList.remove('hidden');
+
+        document.body.style.background = 'linear-gradient(135deg,#ff69b4,#ff1493,#ffb6c1)';
+    }
+}
+
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+</script>
+
+</body>
+</html>
